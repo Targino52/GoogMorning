@@ -74,7 +74,7 @@ fun MyScreen() {
                     }
                 },
 
-            )
+                )
         },
 
         modifier = Modifier.padding(end = 16.dp)
@@ -112,7 +112,7 @@ fun MyScreen() {
                     //label = { Text("Digite seu nome") },
                     modifier = Modifier
                         .fillMaxWidth()
-                    )
+                )
             }
         }
 
