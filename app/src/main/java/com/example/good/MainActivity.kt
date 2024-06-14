@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,9 +39,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GoodTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MyScreen()
-                }
+                MyScreen()
             }
         }
     }
@@ -58,12 +58,13 @@ fun MyscreenPreview() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyScreen() {
-    var nome by remember { mutableStateOf("") } // Estado para o nome
+    var name by remember { mutableStateOf("") } // Estado para o nome
+    var nameTextChange by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Bom dia, $nome") }, // Título dinâmico
+                title = { Text("Bom dia") }, // Título dinâmico
                 navigationIcon = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
@@ -75,32 +76,42 @@ fun MyScreen() {
 
             )
         },
-        floatingActionButton = { /* ... seu FAB ... */ }
+
+        modifier = Modifier.padding(end = 16.dp)
     ) { innerPadding ->
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            Row (modifier = Modifier.fillMaxWidth(),
+            Row (modifier = Modifier.fillMaxWidth().padding(start = 8.dp, bottom = 8.dp)){
+                Text(text = "Meu nome é ${name}")
+            }
+            Row (modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp),
                 verticalAlignment = Alignment.CenterVertically){
-                IconButton(onClick = { setTextInput() }) {
+                IconButton(modifier = Modifier.align(Alignment.CenterVertically), onClick = {
+                    name = nameTextChange })
+                {
+
                     Icon(
                         imageVector = Icons.Filled.Search,
                         contentDescription = "Localized description",
-                        modifier = Modifier.fillMaxSize().align(Alignment.CenterVertically)
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .align(Alignment.CenterVertically)
 
                     )
                 }
 
                 OutlinedTextField(
-                    value = nome,
-                    onValueChange = { nome = it },
-                    label = { Text("Digite seu nome") },
+                    value = name,
+                    onValueChange = { nameTextChange = it },
+                    //label = { Text("Digite seu nome") },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
-
                     )
             }
         }
@@ -108,6 +119,6 @@ fun MyScreen() {
     }
 }
 
-fun setTextInput(){
+fun setTextInput(value:String){
 
 }
