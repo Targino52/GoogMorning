@@ -93,7 +93,10 @@ fun MyScreen() {
                 .height(50.dp),
                 verticalAlignment = Alignment.CenterVertically){
                 IconButton(modifier = Modifier.align(Alignment.CenterVertically), onClick = {
-                    name = nameTextChange })
+
+                        name = nameTextChange
+
+                })
                 {
 
                     Icon(
@@ -107,9 +110,8 @@ fun MyScreen() {
                 }
 
                 OutlinedTextField(
-                    value = name,
+                    value = nameTextChange,
                     onValueChange = { nameTextChange = it },
-                    //label = { Text("Digite seu nome") },
                     modifier = Modifier
                         .fillMaxWidth()
                 )
@@ -118,3 +120,4 @@ fun MyScreen() {
 
     }
 }
+
