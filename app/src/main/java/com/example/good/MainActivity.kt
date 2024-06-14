@@ -118,7 +118,3 @@ fun MyScreen() {
 
     }
 }
-
-fun setTextInput(value:String){
-
-}
